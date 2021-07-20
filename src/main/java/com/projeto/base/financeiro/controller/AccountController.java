@@ -1,18 +1,17 @@
 package com.projeto.base.financeiro.controller;
 
-import java.util.List;
-
+import com.projeto.base.financeiro.model.Account;
+import com.projeto.base.financeiro.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.projeto.base.financeiro.model.Account;
-import com.projeto.base.financeiro.repository.AccountRepository;
+
+import java.util.List;
 
 /**
  * AccountController.java
- *
  * @author Desenvolvedor
  * 2021
  **/
