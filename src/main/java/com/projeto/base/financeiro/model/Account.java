@@ -68,7 +68,7 @@ public class Account implements Serializable {
 	@Getter
 	private List<ServicesAccount> services = new ArrayList<>();
 
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@Getter @Setter
 	private User user;

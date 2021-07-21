@@ -38,35 +38,35 @@ public class SpringBaseApplication {
 	@Bean // Initial data Load
 	public void LoadDatabase () {
 		//Services
-		List<ServicesAccount> srvlist = Arrays.asList(
-			new ServicesAccount("Limite",TypeService.LIMITE_ADICIONAL, 1.0),
-			new ServicesAccount("Cartão Black", TypeService.CARTAO_CREDITO, 13.0),
-			new ServicesAccount("Ações na Bolsa", TypeService.CONTA_DE_ACOES, 3.0),
-			new ServicesAccount("Emprestimo", TypeService.EMPRESTIMO, 5.0),
-			new ServicesAccount("Seguros Diversos", TypeService.PROTECAO_ONLINE, 1.0));
-
-		servAcc.saveAll(srvlist);
-
-		User u1 = new User("Carlos Dias", "carlos@gmail.br", "123");
-		User u2 = new User("Roberto Campos", "campos@gmail.br", "@123");
-		User u3 = new User("Maria de Anjos", "deanjos@gmail.br", "#1123");
-		User u4 = new User("Estenio Garcia", "estenio@gmail.br", "1@23");
-		User u5 = new User("Soraya Monetenegro", "montenegro@gmail.br", "Txu@345");
-		User u6 = new User("Eros Ramazotte", "erosra@gmail.br", "123");
-		List<User> listUser = Arrays.asList(u1,u2,u3, u4,u5,u6);
-
-
-
-		List<Account> listAccount = Arrays.asList(
-				   					new Account(u1),
-				   					new Account(u2),
-		           					new Account(u3),
-				   					new Account(u4),
-				   					new Account(u5),
-				   					new Account(u6));
-
-		userRepopsitory.saveAll(listUser);
-		accountRepository.saveAll(listAccount);
+//		List<ServicesAccount> srvlist = Arrays.asList(
+//			new ServicesAccount("Limite",TypeService.LIMITE_ADICIONAL, 1.0),
+//			new ServicesAccount("Cartão Black", TypeService.CARTAO_CREDITO, 13.0),
+//			new ServicesAccount("Ações na Bolsa", TypeService.CONTA_DE_ACOES, 3.0),
+//			new ServicesAccount("Emprestimo", TypeService.EMPRESTIMO, 5.0),
+//			new ServicesAccount("Seguros Diversos", TypeService.PROTECAO_ONLINE, 1.0));
+//
+//		servAcc.saveAll(srvlist);
+//
+//		User u1 = new User("Carlos Dias", "carlos@gmail.br", "123");
+//		User u2 = new User("Roberto Campos", "campos@gmail.br", "@123");
+//		User u3 = new User("Maria de Anjos", "deanjos@gmail.br", "#1123");
+//		User u4 = new User("Estenio Garcia", "estenio@gmail.br", "1@23");
+//		User u5 = new User("Soraya Monetenegro", "montenegro@gmail.br", "Txu@345");
+//		User u6 = new User("Eros Ramazotte", "erosra@gmail.br", "123");
+//		List<User> listUser = Arrays.asList(u1,u2,u3, u4,u5,u6);
+//
+//
+//
+//		List<Account> listAccount = Arrays.asList(
+//				   					new Account(u1),
+//				   					new Account(u2),
+//		           					new Account(u3),
+//				   					new Account(u4),
+//				   					new Account(u5),
+//				   					new Account(u6));
+//
+//		userRepopsitory.saveAll(listUser);
+//		accountRepository.saveAll(listAccount);
 
 	}
 
