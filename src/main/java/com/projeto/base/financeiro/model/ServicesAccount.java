@@ -6,10 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**Service.java
  * @author Desenvolvedor
@@ -18,8 +15,7 @@ import lombok.ToString;
 
   @Entity @Table(name = "services_domain")
   @NoArgsConstructor
-  @Getter @Setter 
-  @ToString
+  @Data
   public class ServicesAccount {
   
   @Id

@@ -6,10 +6,10 @@ package com.projeto.base.financeiro.model;
 **/
 
 enum StatusAcc {
+	NOVA,
 	ATIVA,
 	INATIVA,
 	SUSPENSA,
-	BLOQUEADA,
-	NOVA;
+	BLOQUEADA;
 
 }

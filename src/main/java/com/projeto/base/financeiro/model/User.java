@@ -8,10 +8,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.base.financeiro.security.Crypto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 /**
@@ -21,6 +18,7 @@ import lombok.Setter;
 **/
 
 @Entity @Table(name = "user_account")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
@@ -29,21 +27,15 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
 	private Long id;
-	
-	@Getter @Setter
 	private String name;
 	
 	@Column(name = "username")
-	@Getter @Setter
 	private String username;
-	
-	@Setter @Getter
     private String password;
-	@JsonIgnore
+
+    @JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-	@Getter @Setter
 	private Account account;
 
 	public User(String name, String username, String password) {
@@ -69,9 +61,7 @@ public class User implements Serializable {
 				password = Crypto.crypto("123");
 			} catch (NoSuchAlgorithmException e) {
 				e.printStackTrace();
-			}finally {
-				
-			}	
+			}
 		}
 	}
 	@Override

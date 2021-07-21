@@ -1,16 +1,11 @@
 package com.projeto.base.financeiro.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**Person.java
@@ -18,22 +13,27 @@ import lombok.Setter;
  * 2021 
 **/
 @Entity
+@Data
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)//Mapeamento Herança
 public class Person {
     
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
 	private Long id;
-    @Getter @Setter
 	private String name;
-    @Getter @Setter
 	private String email;
-	@Getter @Setter
 	private String telefone;
-    @Getter @Setter
 	private String cpf;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name ="contact_id")
+	private List<Contact> contacts = new ArrayList<Contact>();
+
 	
 	public Person(Long id, String name, String email) {
 		this.id = id;
