@@ -4,6 +4,7 @@ import com.projeto.base.financeiro.model.Account;
 import com.projeto.base.financeiro.model.User;
 import com.projeto.base.financeiro.repository.AccountRepository;
 import com.projeto.base.financeiro.repository.UserRepository;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/account")
+@Api(value="Api REST Account")
+@CrossOrigin(origins = "*")
 public class AccountController {
 
     private UserRepository userRepository;

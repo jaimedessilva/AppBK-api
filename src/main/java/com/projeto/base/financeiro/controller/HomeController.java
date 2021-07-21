@@ -2,6 +2,9 @@ package com.projeto.base.financeiro.controller;
 
 import java.security.GeneralSecurityException;
 
+import io.swagger.annotations.Api;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,16 +16,13 @@ import com.projeto.base.financeiro.security.Crypto;
  * 2021 
 **/
 
-@RestController
-@RequestMapping("/")
+@Controller
+@CrossOrigin(origins = "*")
+@Api(value="Api REST Account")
 public class HomeController {
-	
-	@GetMapping
-	public String msg () throws GeneralSecurityException {
-		
-		String msg = "Hello 123";
-		String pass = Crypto.crypto(msg);
-		
-		return "<h1>API Person's v1.0 "+ pass +"</h1>";
+
+	@RequestMapping("/")
+	public String home () {
+		return "redirect:/index.html";
 	}
 }

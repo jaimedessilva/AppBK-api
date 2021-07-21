@@ -1,6 +1,8 @@
 package com.projeto.base.financeiro.controller;
 
 import java.util.List;
+
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import com.projeto.base.financeiro.service.PersonService;
 
 @RestController
 @RequestMapping("person")
+@Api(value="Api REST Account")
 @CrossOrigin( origins = "*")
 public class PersonController {
 	

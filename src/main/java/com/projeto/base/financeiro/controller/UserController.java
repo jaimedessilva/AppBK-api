@@ -2,6 +2,7 @@ package com.projeto.base.financeiro.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +25,7 @@ import javassist.NotFoundException;
 
 @RestController
 @RequestMapping("/users")
+@Api(value="Api REST Account")
 @CrossOrigin( origins = "*")
 public class UserController {
 	

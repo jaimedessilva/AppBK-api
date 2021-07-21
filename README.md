@@ -4,6 +4,8 @@
 
 <a href="#">Api Rest</a>
 
+<img src="./src/main/resources/static/img/heroku-icon.svg"/>
+
 ##
 ##
 
@@ -14,7 +16,9 @@
 * Java 8
 * Spring Boot
 * Spring Data-JPA
+* Swagger
 * Lombok
 * BD PostgreSQL
+
 
 ## Status: Prototipo Inicial

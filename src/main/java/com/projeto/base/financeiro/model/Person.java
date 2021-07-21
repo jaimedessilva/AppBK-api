@@ -34,15 +34,17 @@ public class Person {
 	@JoinColumn(name ="contact_id")
 	private List<Contact> contacts = new ArrayList<Contact>();
 
-	
+	public Person() { }
 	public Person(Long id, String name, String email) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 	}
-	public Person() {
-	
+	public Person (String name, String email){
+		this.name = name;
+		this.email = email;
 	}
+
 	@Override
 	public String toString() {
 		return "Person: id: " + id 
