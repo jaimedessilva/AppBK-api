@@ -33,41 +33,49 @@ public class PersonController {
 	public PersonController(PersonService service) {
 		this.service = service;
 	}
+
 	//GET
 	@GetMapping
-	public ResponseEntity<List<Person>> getAll(){
-		return ResponseEntity.ok(service.listAll());	
-	}
-	//GET
-	@GetMapping(path ="/name")
-	public ResponseEntity<List<Person>> getAllNames(){
+	public ResponseEntity<List<Person>> getAll() {
 		return ResponseEntity.ok(service.listAll());
 	}
+
+	//GET
+	@GetMapping(path = "/name")
+	public ResponseEntity<List<Person>> getAllNames() {
+		return ResponseEntity.ok(service.listAll());
+	}
+
 	//GET ID
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<Person> find(@PathVariable long id){
+	public ResponseEntity<Person> find(@PathVariable long id) {
 		return ResponseEntity.ok(service.findOne(id));
 	}
+
 	//GET NAME
 	@GetMapping(path = "/name/{name}")
-	public ResponseEntity<List<Person>>getAllName(@PathVariable String name){
+	public ResponseEntity<List<Person>> getAllName(@PathVariable String name) {
 		return ResponseEntity.ok(service.findName(name));
 	}
+
 	//POST
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Person>postPerson(@RequestBody Person p){
+	public ResponseEntity<Person> postPerson(@RequestBody Person p) {
+
 		return ResponseEntity.ok(service.createPerson(p));
 	}
+
 	//DELETE
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.deletePerson(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+
 	//PUT
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Person> putPerson(@PathVariable long id, @RequestBody Person p){
+	public ResponseEntity<Person> putPerson(@PathVariable long id, @RequestBody Person p) {
 		service.updatePerson(p, id);
 		return new ResponseEntity<Person>(HttpStatus.OK);
 	}

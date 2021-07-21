@@ -3,30 +3,26 @@ package com.projeto.base.financeiro.model;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.base.financeiro.security.Crypto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-/**User.java
+/**
+ * User.java
  * @author Desenvolvedor
  * 2021 
 **/
 
 @Entity @Table(name = "user_account")
 @NoArgsConstructor
+@AllArgsConstructor
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -43,11 +39,11 @@ public class User implements Serializable {
 	@Getter @Setter
 	private String username;
 	
-	@Getter
+	@Setter @Getter
     private String password;
-	
-	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-	@Getter @Setter @JsonIgnore
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	@Getter @Setter
 	private Account account;
 
 	public User(String name, String username, String password) {
@@ -59,12 +55,6 @@ public class User implements Serializable {
 		catch (NoSuchAlgorithmException e) {e.printStackTrace();
 		}
 	}
-	public User(String name, String username) {
-		super();
-		this.name = name;
-		this.username = username;
-	}	
-	
 	//Password
 	public void setPassword(String password) {
 		if (password != null) {

@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -28,9 +30,10 @@ import lombok.NoArgsConstructor;
  **/
 @Entity @Table(name = "account")
 @Data
-@NoArgsConstructor
 //@IdClass(Account.class)
 @EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 public class Account implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -51,19 +54,19 @@ public class Account implements Serializable {
 	
 	@Column(nullable = true)
 	private Double cBalance;
-	
+	@JsonIgnore
 	@Column(name ="status_account")
 	private StatusAcc status;
 	
 	@Column(name = "date_create")
 	private Date dt = new Date();
-	
+
 	@ManyToMany
 	@JoinTable(name = "service_account") 
 	private List<ServicesAccount> services = new ArrayList<>();
-	
-	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id")
 	private User user;
 	
 	
@@ -74,7 +77,7 @@ public class Account implements Serializable {
 		this.cBalance = 1.00;
 		this.status = StatusAcc.NOVA;
 		this.dt = new Date();
-		this.services = new ArrayList<>();	
+		this.services = new ArrayList<>();
 	}
 
 	@Override

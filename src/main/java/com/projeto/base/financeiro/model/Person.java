@@ -24,18 +24,12 @@ public class Person {
     
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter
+	@Getter @Setter
 	private Long id;
     @Getter @Setter
 	private String name;
     @Getter @Setter
 	private String email;
-    public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	@Getter @Setter
 	private String telefone;
     @Getter @Setter

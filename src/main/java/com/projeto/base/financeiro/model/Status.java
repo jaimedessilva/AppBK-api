@@ -10,6 +10,6 @@ enum StatusAcc {
 	INATIVA,
 	SUSPENSA,
 	BLOQUEADA,
-	NOVA
+	NOVA;
 
 }

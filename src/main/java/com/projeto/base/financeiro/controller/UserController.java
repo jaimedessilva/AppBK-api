@@ -34,45 +34,49 @@ public class UserController {
 		this.userRepository = repo;
 	}
 	@GetMapping
+
 	public List<User> getAll(){
+
 		return userRepository.findAll();
 	}
 	@GetMapping("/size")
 	public int getSize() {
+
 		return userRepository.findAll().size() + 1;
 	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getById(@PathVariable long id) throws NotFoundException{
 		User user = userRepository.findById(id)
-				.orElse(new User("404","Nout Foud User"));
+				.orElse(new User("404","Nout Foud User",null));
 				//.orElseThrow(()-> new NotFoundException("User not Found: " + 1));		
 		return ResponseEntity.ok(user); 
 	}
 	@PostMapping
 	public User createUser (@RequestBody User user){
+
 		return userRepository.save(user);
 	}
+
 	@PutMapping("/{id}")
 	public ResponseEntity<User> update(@PathVariable long id, @RequestBody User user)throws NotFoundException {
-//    User value = userRepository.findById(id)
-//    		.orElseThrow(()-> new NotFoundException("User ID: "+ id + "Not Found"));
-//			    
-//    			value.setId(user.getId());
-//			    value.setName(user.getName());
-//			    value.setUsername(user.getUsername());
-//			    value.setPassword(user.getPassword());
-//			    value.setAccount(user.getAccount());
-//			    
-//			    User userNew = userRepository.save(value);
-//			    
-//    return ResponseEntity.ok(userNew);
-		return null;
-    
+    User value = userRepository.findById(id)
+    		.orElseThrow(()-> new NotFoundException("User ID: "+ id + "Not Found"));
+
+    			value.setId(user.getId());
+			    value.setName(user.getName());
+			    value.setUsername(user.getUsername());
+			    value.setPassword(user.getPassword());
+			    value.setAccount(user.getAccount());
+
+			    User userNew = userRepository.save(value);
+
+    return ResponseEntity.ok(userNew);
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<User> delete(@PathVariable long id){
 		User user = userRepository.findById(id)
-				.orElse(new User("404", "Não Existe"));
+				.orElse(new User("404", "Não Existe",null));
 		userRepository.delete(user);
 		return ResponseEntity.noContent().build();
 	}
