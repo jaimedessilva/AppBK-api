@@ -75,5 +75,21 @@ public class MainBase {
 //		Account ac2 = new Account(u1);
 //
 //		System.out.println(ac2);
+		Account account = new Account();
+		Double saque = account.sacar(33.0);
+		System.out.println(saque);
+
+		Double novo = account.sacar(21.0);
+
+		Double saque1 = account.sacar(40.0);
+
+		Double saque2 = account.sacar(10.0);
+
+		Double depositar = account.depositar(100.0);
+
+		System.out.println(" Agora o seu Saldo é: " +account.getCBalance());
+
+
+
 
 	}}

@@ -19,20 +19,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * Account.java
  * @author Desenvolvedor 2021
  **/
+
 @Entity @Table(name = "account")
-@Data
-//@IdClass(Account.class)
 @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
 public class Account implements Serializable {
 	
@@ -41,43 +36,79 @@ public class Account implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "account_id", nullable = true)
+	@Getter
 	private Long id;
 	
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	//@SequenceGenerator(name ="conta", initialValue = 1000)
 	@Column(name = "number")
+	@Getter
 	private int cNumber;
 	
-	//@Transient 
+
 	@Column(nullable = true)
+	@Getter
 	private double cLimit;
 	
 	@Column(nullable = true)
+	@Getter
 	private Double cBalance;
+
 	@JsonIgnore
 	@Column(name ="status_account")
+	@Getter
 	private StatusAcc status;
 	
 	@Column(name = "date_create")
+	@Getter
 	private Date dt = new Date();
 
 	@ManyToMany
-	@JoinTable(name = "service_account") 
+	@JoinTable(name = "service_account")
+	@Getter
 	private List<ServicesAccount> services = new ArrayList<>();
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "user_id")
+	@Getter @Setter
 	private User user;
 	
-	
+	public Account(){
+		this.user = user;
+		this.cNumber = 10000 + new Date().getSeconds();
+		this.cLimit = 150.00;
+		this.cBalance = 100.00;
+		this.status = StatusAcc.NOVA;
+		this.dt = new Date();
+		this.services = new ArrayList<>();
+	}
 	public Account(User user) {
 		this.user = user;
 		this.cNumber = 10000 + new Date().getSeconds();
 		this.cLimit = 100.00;
-		this.cBalance = 1.00;
+		this.cBalance = 100.00;
 		this.status = StatusAcc.NOVA;
 		this.dt = new Date();
 		this.services = new ArrayList<>();
+	}
+	//Saque
+	public Double sacar(Double value){
+		if (value > this.cBalance){
+			System.out.println("!!!Saldo insuficiente!!!");
+			return cBalance;
+		}
+		else {
+			Double novoSaldo = this.cBalance -= value;
+			System.out.println("Saque: R$: " + value);
+			System.out.println("Seu novo saldo é R$: " + novoSaldo);
+			this.cBalance = novoSaldo;
+			return value;
+		}
+	}
+	//Deposito
+	public Double depositar(Double value){
+		Double novoSaldo = this.cBalance + value;
+		this.cBalance = novoSaldo;
+		return novoSaldo;
 	}
 
 	@Override
