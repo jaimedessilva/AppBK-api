@@ -35,7 +35,7 @@ public class User implements Serializable {
     private String password;
 
     @JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.MERGE, mappedBy = "user", fetch = FetchType.LAZY)
 	private Account account;
 
 	public User(String name, String username, String password) {

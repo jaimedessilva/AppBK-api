@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -67,7 +68,7 @@ public class Account implements Serializable {
 	@Getter
 	private List<ServicesAccount> services = new ArrayList<>();
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@Getter @Setter
 	private User user;
