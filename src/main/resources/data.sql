@@ -1,4 +1,4 @@
--- select 1;
+select 1;
 --insert into user_account (name, username, password) values ('Carlos Maia', 'cmaia@email', '1234');
 --insert into user_account (name, username, password) values ('Joaquim Barbosa', 'joaquin@email', '1234');
 --insert into user_account (name, username, password) values ('Romeu Ptolomeu', 'ptolome@email', '1234');
