@@ -23,19 +23,6 @@ public class MainBase {
 	
 	public void initialInsert() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //				Account ac2 = new Account(u2);
 //				Account ac3 = new Account(u3);
 //				Account ac4 = new Account(u4);
@@ -43,11 +30,7 @@ public class MainBase {
 //				Account ac6 = new Account(u6);
 ////
 //				List<Account> accList = Arrays.asList(ac1,ac2,ac3,ac4,ac5,ac6);
-	
 
-
-
-				
 				//accRepo.saveAll(accList);
 				
 				//accList.forEach(value->System.out.println(value));
@@ -74,20 +57,25 @@ public class MainBase {
 //
 //		Account ac2 = new Account(u1);
 //
-//		System.out.println(ac2);
-		Account account = new Account();
-		Double saque = account.sacar(33.0);
-		System.out.println(saque);
+////		System.out.println(ac2);
+//		Account account = new Account();
+//		Double saque = account.sacar(33.0);
+//		System.out.println(saque);
+//
+//		Double novo = account.sacar(21.0);
+//
+//		Double saque1 = account.sacar(40.0);
+//
+//		Double saque2 = account.sacar(10.0);
+//
+//		Double depositar = account.depositar(100.0);
+//
+//		System.out.println(" Agora o seu Saldo é: " +account.getCBalance());
+		Person p = new Person ();
+		System.out.println(p);
 
-		Double novo = account.sacar(21.0);
 
-		Double saque1 = account.sacar(40.0);
 
-		Double saque2 = account.sacar(10.0);
-
-		Double depositar = account.depositar(100.0);
-
-		System.out.println(" Agora o seu Saldo é: " +account.getCBalance());
 
 
 

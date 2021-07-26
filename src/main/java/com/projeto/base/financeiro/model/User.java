@@ -16,9 +16,7 @@ import lombok.*;
  * @author Desenvolvedor
  * 2021 
 **/
-
 @Entity @Table(name = "user_account")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
@@ -27,15 +25,20 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter @Setter
 	private Long id;
+	@Getter @Setter
 	private String name;
 	
 	@Column(name = "username")
+	@Getter @Setter
 	private String username;
+	@Setter
     private String password;
 
     @JsonIgnore
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "user", fetch = FetchType.LAZY)
+	@Setter @Getter
 	private Account account;
 
 	public User(String name, String username, String password) {

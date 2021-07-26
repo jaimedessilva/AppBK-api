@@ -26,7 +26,7 @@ public class Person {
 	private String telefone;
 	private String cpf;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -34,15 +34,8 @@ public class Person {
 	@JoinColumn(name ="contact_id")
 	private List<Contact> contacts = new ArrayList<Contact>();
 
-	public Person() { }
-	public Person(Long id, String name, String email) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-	}
-	public Person (String name, String email){
-		this.name = name;
-		this.email = email;
+	public Person (){
+		this.user = new User();
 	}
 
 	@Override
@@ -51,6 +44,7 @@ public class Person {
 				+ "\n name: " + name 
 				+ "\n email: " + email 
 				+ "\n telefone: " + telefone 
-				+ "\n cpf: " + cpf;
+				+ "\n cpf: " + cpf
+				+"\n User:" + user;
 	}	
 }

@@ -2,11 +2,13 @@ package com.projeto.base.financeiro.service;
 
 import java.util.List;
 
+import com.projeto.base.financeiro.exception.ResourceNotFoundException;
+import com.projeto.base.financeiro.repository.UserRepository;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.projeto.base.financeiro.model.Person;
 import com.projeto.base.financeiro.repository.PersonRepository;
@@ -20,34 +22,28 @@ import com.projeto.base.financeiro.repository.PersonRepository;
 public class PersonService {
 
 	PersonRepository repository;
+	UserRepository userRepository;
 	
 	@Autowired
-	public PersonService(PersonRepository repository) {
+	public PersonService(PersonRepository repository, UserRepository userRepository) {
 		this.repository = repository;
+		this.userRepository = userRepository;
 	}
-	
-//	List<Person> lsp = Arrays.asList(
-//			new Person(1L,"Carlos Sampaio", "nome@gmail.com"),
-//			new Person(2L,"Claudio dos Santos", "claudio@gmail.com"),
-//			new Person(3L,"Soraya Monetnegro", "soraya@email.com"));
-	
 	/*
 	 * List All Static
 	 */
 	public List<Person> listAll(){
 		//return lsp;
 		//repository.findAll();
-		return (List<Person>) repository.findAll(); 
+		return (List<Person>) repository.findAllPerson();
 	}
 	/*
 	 * Read
 	 */
-	public Person findOne(Long id) {
-	  return 
-		listAll().stream()
-		.filter(p -> p.getId().equals(id))
-		.findFirst()
-		.orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Person Not Found"));
+	public Person findOne(Long id) throws ResourceNotFoundException {
+		Person person = repository.findById(id)
+				.orElseThrow(()-> new ResourceNotFoundException("Id: "+ id +" não encontrado"));
+		return person;
 	}
 	/*
 	 * Find By Like Name
@@ -58,8 +54,8 @@ public class PersonService {
 	/*
 	 * Create
 	 */
-	public Person createPerson(Person p) {
-		return repository.save(p);
+	public Person createPerson(@RequestBody Person p) {
+		return repository.saveAndFlush(p);
 	}
 	/*
 	 * Update
@@ -71,6 +67,7 @@ public class PersonService {
 						value.setEmail(p.getEmail());
 						value.setTelefone(p.getTelefone());
 						value.setCpf(p.getCpf());
+						value.setUser(p.getUser());
 						Person pnew = repository.save(value);
 						return ResponseEntity.ok().body(pnew);	
 				}).orElse(ResponseEntity.notFound().build());
@@ -78,9 +75,10 @@ public class PersonService {
 	/*
 	 * Delete
 	 */
-	public void deletePerson(Long id) {
-		Person p = findOne(id);
-		repository.delete(p);
+	public void deletePerson(Long id) throws ResourceNotFoundException {
+	Person p = repository.findById(id)
+			.orElseThrow(()-> new ResourceNotFoundException("Usuario Id "+id+ " Não encontrado"));
+			repository.delete(p);
 	}
 	
 	

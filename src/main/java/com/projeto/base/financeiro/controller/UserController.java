@@ -3,6 +3,7 @@ package com.projeto.base.financeiro.controller;
 import java.util.List;
 
 import io.swagger.annotations.Api;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -50,7 +51,7 @@ public class UserController {
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getById(@PathVariable long id) throws NotFoundException{
 		User user = userRepository.findById(id)
-				.orElse(new User("404","Nout Foud User",null));
+				.orElse(new User("404","Not Foud User",null));
 				//.orElseThrow(()-> new NotFoundException("User not Found: " + 1));		
 		return ResponseEntity.ok(user); 
 	}
@@ -62,18 +63,15 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<User> update(@PathVariable long id, @RequestBody User user)throws NotFoundException {
-    User value = userRepository.findById(id)
-    		.orElseThrow(()-> new NotFoundException("User ID: "+ id + "Not Found"));
-
-    			value.setId(user.getId());
-			    value.setName(user.getName());
-			    value.setUsername(user.getUsername());
-			    value.setPassword(user.getPassword());
-			    value.setAccount(user.getAccount());
-
-			    User userNew = userRepository.save(value);
-
-    return ResponseEntity.ok(userNew);
+    return (ResponseEntity<User>) userRepository.findById(id)
+			.map(obj ->{
+				obj.setId(user.getId());
+				obj.setName(user.getName());
+				obj.setUsername(user.getUsername());
+				obj.setAccount(user.getAccount());
+				User uNew = userRepository.save(obj);
+				return ResponseEntity.ok().body(uNew);
+			}).orElse(ResponseEntity.notFound().build());
 	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<User> delete(@PathVariable long id){

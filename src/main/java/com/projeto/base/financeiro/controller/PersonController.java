@@ -1,23 +1,15 @@
 package com.projeto.base.financeiro.controller;
 
-import java.util.List;
-
+import com.projeto.base.financeiro.exception.ResourceNotFoundException;
+import com.projeto.base.financeiro.model.Person;
+import com.projeto.base.financeiro.service.PersonService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import com.projeto.base.financeiro.model.Person;
-import com.projeto.base.financeiro.service.PersonService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**PersonController.java
  * @author Desenvolvedor
@@ -31,10 +23,12 @@ import com.projeto.base.financeiro.service.PersonService;
 public class PersonController {
 	
 	PersonService service;
+	//UserController userController;
 
 	@Autowired
 	public PersonController(PersonService service) {
 		this.service = service;
+		//this.userController = userController;
 	}
 
 	//GET
@@ -51,7 +45,7 @@ public class PersonController {
 
 	//GET ID
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<Person> find(@PathVariable long id) {
+	public ResponseEntity<Person> find(@PathVariable long id) throws ResourceNotFoundException {
 		return ResponseEntity.ok(service.findOne(id));
 	}
 
@@ -65,13 +59,12 @@ public class PersonController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Person> postPerson(@RequestBody Person p) {
-
 		return ResponseEntity.ok(service.createPerson(p));
 	}
 
 	//DELETE
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
+	public ResponseEntity<Void> delete(@PathVariable Long id) throws ResourceNotFoundException {
 		service.deletePerson(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
@@ -80,7 +73,7 @@ public class PersonController {
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Person> putPerson(@PathVariable long id, @RequestBody Person p) {
 		service.updatePerson(p, id);
-		return new ResponseEntity<Person>(HttpStatus.OK);
+		return ResponseEntity.ok(p);
 	}
 
 }

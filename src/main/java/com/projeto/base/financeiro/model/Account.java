@@ -74,7 +74,7 @@ public class Account implements Serializable {
 	private User user;
 	
 	public Account(){
-		this.user = user;
+		this.user = new User();
 		this.cNumber = 10000 + new Date().getSeconds();
 		this.cLimit = 150.00;
 		this.cBalance = 100.00;
