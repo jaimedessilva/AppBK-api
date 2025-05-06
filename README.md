@@ -2,10 +2,6 @@
 
 ## Banking Account Api
 
-<a href="https://app-bk.herokuapp.com">Api Rest
-
-<img src="./src/main/resources/static/img/heroku-icon.svg"/></a>
-
 ##
 ##
 
